@@ -49,7 +49,7 @@ def ml_loop():
         drop = 0
         if delta[1] > 0:
             isDrop = True
-           # drop = scene_info.ball[0] + delta[0] * (400 - scene_info.ball[1]) / delta[1]
+            drop = scene_info.ball[0] + delta[0] * (400 - scene_info.ball[1]) / delta[1]
             drop = int(drop)
             drop = drop - (drop % 5)
                 
