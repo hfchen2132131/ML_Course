@@ -4,6 +4,7 @@ The template of the main script of the machine learning process
 import pickle
 import numpy as np
 import random
+import sklearn.svm
 
 from mlgame.communication import ml as comm
 import os.path as path
