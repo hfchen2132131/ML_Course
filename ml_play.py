@@ -24,12 +24,13 @@ def ml_loop(side: str):
     # === Here is the execution order of the loop === #
     # 1. Put the initialization code here.
     ball_served = False
-    filename = path.join(path.dirname(__file__),"save\\clf_KMeans_PingPong.pickle")
+    if side == "1P":
+        filename = path.join(path.dirname(__file__),"clf_KMeans_PingPong.pickle")
+    else:
+        filename = path.join(path.dirname(__file__),"clf_KMeans_PingPong_p2.pickle")
     with open(filename, 'rb') as file:
         clf_p1 = pickle.load(file)
-    filename = path.join(path.dirname(__file__),"save\\clf_KMeans_PingPong_p2.pickle")
-    with open(filename, 'rb') as file2:
-        clf_p2 = pickle.load(file2)
+    
 
     s = [93,93]
     def get_direction(ball_x,ball_y,ball_pre_x,ball_pre_y):
@@ -120,10 +121,7 @@ def ml_loop(side: str):
                 comm.send_to_game({"frame": scene_info["frame"], "command": "SERVE_TO_RIGHT"})
             ball_served = True
         else:
-            if side == "1P":
-                y = clf_p1.predict(feature)
-            else:
-                y = clf_p2.predict(feature)
+            y = clf_p1.predict(feature)
             if y == 0:
                 comm.send_to_game({"frame": scene_info["frame"], "command": "NONE"})
                 print('NONE')
